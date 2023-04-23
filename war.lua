@@ -1,5 +1,5 @@
 rconsolename("GHAST OWNS YOU ; ghast#0001")
-rconsoleprint("@@CYAN@@")
+rconsoleprint("@@PURPLE@@")
 
 if not game:IsLoaded() then
     rconsoleprint("[Waiting] \n")
@@ -126,7 +126,7 @@ local function MainFarm()
         end
     else
         rconsoleprint("@@RED@@")
-        rconsoleprint(" [0 eggs found] ".." \n")
+        rconsoleprint("[0 eggs found] ".." \n")
     end
     return true
 end
