@@ -21,7 +21,7 @@ local QueueOnTeleport = queue_on_teleport or syn.queue_on_teleport
 local FoundEggs = false;
 
 QueueOnTeleport([[
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/aimfuls/eggfarm/main/god.lua", true))();
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/aimfuls/git/main/war.lua", true))();
 ]])
 
 UserSettings().GameSettings.MasterVolume = 0
