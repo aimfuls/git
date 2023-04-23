@@ -1,4 +1,4 @@
-rconsolename("EGGFARM")
+rconsolename("GHAST RUNS YOU ; ghast#0001")
 rconsoleprint("@@MAGENTA@@")
 
 if not game:IsLoaded() then
