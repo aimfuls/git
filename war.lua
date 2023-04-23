@@ -1,12 +1,8 @@
--- da hood egg farm
--- yes very shitty code, i dont rlly care its for a dead game cry abt it
-
--- console was requested
 rconsolename("GHAST OWNS YOU ; ghast#0001")
 rconsoleprint("@@CYAN@@")
 
 if not game:IsLoaded() then
-    rconsoleprint("[*] Awaiting for game to load. \n")
+    rconsoleprint("[Waiting] \n")
     game.Loaded:Wait()
 end
 
@@ -25,7 +21,7 @@ local QueueOnTeleport = queue_on_teleport or syn.queue_on_teleport
 local FoundEggs = false;
 
 QueueOnTeleport([[
-  loadstring(game:HttpGet("https://github.com/aimfuls/git/new/main", true))();
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/aimfuls/eggfarm/main/god.lua", true))();
 ]])
 
 UserSettings().GameSettings.MasterVolume = 0
@@ -47,14 +43,6 @@ local function comma_value(amount) -- not mine, credits to: https://devforum.rob
         end
     end
     return formatted
-end
-
-local function ConvertToHMS(Seconds)
-    local Minutes = (Seconds - Seconds % 60) / 60
-    Seconds = Seconds - Minutes * 60
-    local Hours = (Minutes - Minutes % 60) / 60
-    Minutes = Minutes - Hours * 60
-    return string.format("%02i", Hours) .. ":" .. string.format("%02i", Minutes) .. ":" .. string.format("%02i", Seconds)
 end
 
 local function FindEggs()
@@ -120,38 +108,38 @@ local function MainFarm()
     if (#FindEggs()) ~= 0 then
         FoundEggs = true;
         rconsoleprint("@@LIGHT_BLUE@@")
-        rconsoleprint("[!] ".. (#FindEggs()) .." egg(s) found. \n")
+        rconsoleprint("[!] ".. (#FindEggs()) .." egg(s) \n")
         rconsoleprint("@@CYAN@@")
-        rconsoleprint("[*] Awaiting for character to load. \n")
+        rconsoleprint("[Loading Character] \n")
         repeat task.wait() until game:GetService("Workspace").Players:FindFirstChild(game:GetService("Players").LocalPlayer.Name)
         local BeforeEgg = tonumber(game:GetService("Players").LocalPlayer.DataFolder.Currency.Value);
         CollectEggs()
         local AfterEgg = tonumber(game:GetService("Players").LocalPlayer.DataFolder.Currency.Value) - BeforeEgg;
         Stats[2] = Stats[2] + AfterEgg
         if AfterEgg == 0 then
-            rconsoleprint("@@LIGHT_GREEN@@")
-            rconsoleprint("[!] Collected ".. EggAmount .." egg(s) and gained a skin crate. \n")
+            rconsoleprint("@@BLUE@@")
+            rconsoleprint("[-] Collected ".. EggAmount .." egg(s) and a crate. \n")
             Stats[3] = Stats[3] + 1
         else
-            rconsoleprint("@@LIGHT_GREEN@@")
-            rconsoleprint("[!] Collected ".. EggAmount .." egg(s) and gained ".. comma_value(AfterEgg) .."$. \n")
+            rconsoleprint("@@BLUE@@")
+            rconsoleprint("[-] Collected ".. EggAmount .." egg(s) and gained ".. comma_value(AfterEgg) .."$. \n")
         end
     else
-        rconsoleprint("@@LIGHT_RED@@")
-        rconsoleprint("[!] 0 eggs found inside ".. game.JobId ..". \n")
+        rconsoleprint("@@RED@@")
+        rconsoleprint(" [0 eggs found] ".." \n")
     end
     return true
 end
 
 local function ServerHop()
     local SelectedJobId = RandomJobId();
-    rconsoleprint("@@LIGHT_CYAN@@")
-    rconsoleprint("[#] Server hopping to ".. SelectedJobId ..". \n")
+    rconsoleprint("@@YELLOW@@")
+    rconsoleprint("Server Hopping... ".." \n")
     game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, SelectedJobId)
     game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(Status)
         if Status == Enum.TeleportState.Failed then
-            rconsoleprint("@@LIGHT_RED@@")
-            rconsoleprint("[#] Failed to join ".. SelectedJobId .." finding new server. \n")
+            rconsoleprint("@@RED@@")
+            rconsoleprint("Failed to join ".." finding new server. \n")
             game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, RandomJobId())
         end
     end)
@@ -163,6 +151,6 @@ writefile("eggfarm-stats.json", game:GetService("HttpService"):JSONEncode(Stats)
 ServerHop()
 
 if FoundEggs then
-    rconsoleprint("@@LIGHT_CYAN@@")
-    rconsoleprint("[-] Current farming stats:\n     Eggs collected: ".. comma_value(Stats[1]) .."\n     Money gained: $".. comma_value(Stats[2]) .." \n     Crates opened: ".. comma_value(Stats[3]) .."\n     Servers hopped: ".. comma_value(Stats[5]) .."\n")
+    rconsoleprint("@@LIGHT_GREEN@@")
+    rconsoleprint("[$] Stats:\n     Eggs: ".. comma_value(Stats[1]) .."\n     Money: $".. comma_value(Stats[2]) .." \n     Crates: ".. comma_value(Stats[3]) .."\n     Servers Hopped: ".. comma_value(Stats[5]) .."\n")
 end
