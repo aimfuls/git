@@ -1,5 +1,5 @@
 rconsolename("GHAST OWNS YOU ; ghast#0001")
-rconsoleprint("@@PURPLE@@")
+rconsoleprint("@@MAGENTA@@")
 
 if not game:IsLoaded() then
     rconsoleprint("[Waiting] \n")
