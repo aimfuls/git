@@ -1,5 +1,3 @@
-rconsolename("GHAST RUNS YOU ; ghast#0001")
-
 if not game:IsLoaded() then
 	rconsoleprint("@@MAGENTA@@")
     game.Loaded:Wait()
